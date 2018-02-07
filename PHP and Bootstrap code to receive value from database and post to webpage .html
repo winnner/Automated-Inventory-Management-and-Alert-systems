@@ -1,0 +1,47 @@
+<?php
+$url=$_SERVER['REQUEST_URI'];
+header("Refresh: 10; URL=$url");  // Refresh the webpage every 2 seconds
+?>
+<html>
+<head>
+    <title>Internship Project</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
+        <script type="text/javascript" src="bootstrap/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+</head>
+    <body class="container">
+        <h1><center>Automated Inventory Management and Alert System</center></h1>
+        <table class="table table-striped table-bordered">
+      <tr>
+            <td>Sl.No.</td>
+            <td>Time</td>
+            <td>Number of box present</td>
+      </tr>
+<?php
+    $con=mysqli_connect("localhost","vishu","password","project"); 
+    $result = mysqli_query($con,'SELECT * FROM sensor ORDER BY id DESC');
+    while($row = mysqli_fetch_array($result))
+    {      
+        echo "<tr>";
+        echo "<td>" . $row['id'] . "</td>";
+        echo "<td>" . $row['time'] . "</td>";
+        echo "<td>" . $row['value'] . "</td>";
+        echo "</tr>"; 
+    }
+    mysqli_close($con);
+ ?>
+    <?php if($row['value'] < 4)
+    {?>
+    <script>
+        alert ("Number of boxes are less than 4,so order more boxes as soon as possible");
+    </script>
+    <?php}?>
+    </table>
+        <div class="fluid-container">
+            <h2>Note:</h2>
+        <h4>1.Maximum capacity are 8 boxes.</h4>
+        <h4>2.Each box is of 0.5kg weight(approx.).</h4>
+        <h4>3.You will get alert as number of boxes fall below 4.</h4>
+        </div>
+    </body>
+</html>

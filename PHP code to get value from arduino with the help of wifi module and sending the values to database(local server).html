@@ -1,0 +1,14 @@
+<?php
+/* @var $_SERVER type */
+$url=$_SERVER['REQUEST_URI'];
+header("Refresh: 10; URL=$url");   
+$dbusername = "vishu";  
+$dbpassword = "password"; 
+$server = "localhost";
+$dbconnect=mysqli_connect("localhost","vishu","password","project");
+$dbselect = mysqli_select_db($dbconnect, "project");
+/* @var $kam type */
+$kam= filter_input(INPUT_GET, "value");
+$sql = "INSERT INTO project.sensor(value) values ($kam)";
+mysqli_query($dbconnect,$sql);
+?>
