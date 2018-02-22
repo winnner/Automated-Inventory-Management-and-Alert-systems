@@ -6,7 +6,7 @@
 char ssid[] = "nothing";  //my network ssid name
 char pass[] = "0000000000"; //my network ssid password
 char server[] ="192.168.43.165"; //ip address of my server(laptop)
-hx711 scale(4, 3);//(Dout, Clk)
+//hx711 scale(4, 3);//(Dout, Clk)
 int numberOfBox;
 WiFiClient client;
 void setup(void)
@@ -23,7 +23,7 @@ Serial.println("WiFi connected");
 }
 void loop()
 {
- numberOfBox=scale.getGram()/500;
+ //numberOfBox=scale.getGram()/500;
 if (client.connect(server , 139))
 {
 Serial.print("connected with server\n");
